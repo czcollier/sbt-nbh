@@ -1,10 +1,10 @@
 
 val Version = new {
-  val plugin       = "0.0.1-SNAPSHOT"
-  val sbt13        = "0.13.6"
-  val sbt10        = "1.1.0"
-  val scala_native = "0.3.6"
-  val package_conf = "0.1.0"
+  val plugin       = "0.1.0"
+  val sbt13        = "0.13.17"
+  val sbt10        = "1.2.0"
+  val scala_native = "0.3.8"
+  val package_conf = "0.1.1"
   val scala211     = "2.11.12"
 }
 

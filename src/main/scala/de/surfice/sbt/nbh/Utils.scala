@@ -34,20 +34,34 @@ object Utils {
 
   def resourceJars(cp: Classpath): Seq[File] = cp.files.filter(!_.isDirectory)
 
-  def copyResourceDir(jars: Seq[File], srcPath: File, targetPath: File): Unit =
+  def resourceDirs(cp: Classpath): Seq[File] = cp.files.filter(_.isDirectory)
+
+  def copyResourceDir(dirs: Seq[File], srcPath: File, targetPath: File): Unit =
     if(! targetPath.exists())
       if(srcPath.exists())
         IO.copyDirectory(srcPath,targetPath)
       else {
-        jars.find { f =>
+        dirs.find { f =>
           val path = f.toPath
-          copyFromJar(path,srcPath.toString,targetPath.toPath)
+          if(f.isDirectory)
+            copyFromDir(path,srcPath.toString,targetPath.toPath)
+          else
+            copyFromJar(path,srcPath.toString,targetPath.toPath)
         } match {
           case None => sys.error("Could not copy resource directory: "+srcPath)
           case _ =>
         }
       }
 
+  def copyFromDir(resource: java.nio.file.Path, source: String, target: java.nio.file.Path): Boolean = {
+    val srcdir = resource.resolve(source).toFile
+    val tgtdir = target.resolve(source).toFile
+    if(srcdir.exists()) {
+      IO.copyDirectory(srcdir,tgtdir,true,true)
+      true
+    }
+    else false
+  }
 
   def copyFromJar(resource: java.nio.file.Path, source: String, target: java.nio.file.Path): Boolean = {
 

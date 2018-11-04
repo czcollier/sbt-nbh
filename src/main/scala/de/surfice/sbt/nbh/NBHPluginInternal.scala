@@ -27,9 +27,7 @@ object NBHPluginInternal {
 
     nbhNativeCompileOptions := Nil,
 
-    nbhNativeLinkingOptions := nbhLinkFrameworksComputed.value,
-
-    nbhPlatformId := "macOS"
+    nbhNativeLinkingOptions := nbhLinkFrameworksComputed.value
 
   )
 

@@ -1,6 +1,6 @@
-addSbtPlugin("org.scala-native" % "sbt-scala-native" % "0.3.6")
+addSbtPlugin("org.scala-native" % "sbt-scala-native" % "0.3.8")
 
-addSbtPlugin("de.surfice" % "sbt-package-conf" % "0.1.0")
+addSbtPlugin("de.surfice" % "sbt-package-conf" % "0.1.1")
 
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "1.1")
 
