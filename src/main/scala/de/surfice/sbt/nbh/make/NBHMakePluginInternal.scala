@@ -40,15 +40,16 @@ object NBHMakePluginInternal {
     },
 
     nbhMakeProjectsComputed := {
-      val platform = nbhPlatformId.value
-      nbhMakeProjects.value ++ pconfConfig.value.getConfigList("nbh.make.projects").asScala.map{ conf =>
-        val srcPath = conf.getString("srcPath")
-        val artifacts = if(conf.hasPath("artifacts")) conf.getStringList("artifacts").asScala else Nil
-        val flags = if(conf.hasPath("flags")) conf.getStringList("flags").asScala else Nil
-        val platformFlagsKey = "flags_"+platform
-        val platformFlags = if(conf.hasPath(platformFlagsKey)) conf.getStringList(platformFlagsKey).asScala else Nil
-        NBHMakeProject(file(srcPath),artifacts.map(NBHMakeArtifact.apply),flags ++ platformFlags)
-      }
+      val config = pconfConfig.value
+       nbhMakeProjects.value ++ config.getObject("nbh.make.projects").keySet().asScala
+        .map("nbh.make.projects."+_)
+        .map(config.getConfig)
+        .map{ proj =>
+          val srcPath = proj.getString("srcPath")
+          val artifacts = if(proj.hasPath("artifacts")) proj.getStringList("artifacts").asScala else Nil
+          val flags = if(proj.hasPath("flags")) proj.getStringList("flags").asScala else Nil
+          NBHMakeProject(file(srcPath),artifacts.map(NBHMakeArtifact.apply),flags)
+        }
     },
 
     nbhMakeCopyProjects := {

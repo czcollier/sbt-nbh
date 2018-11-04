@@ -4,7 +4,7 @@ val Version = new {
   val sbt13        = "0.13.6"
   val sbt10        = "1.1.0"
   val scala_native = "0.3.6"
-  val package_conf = "0.1.0"
+  val package_conf = "0.1.1-SNAPSHOT"
   val scala211     = "2.11.12"
 }
 

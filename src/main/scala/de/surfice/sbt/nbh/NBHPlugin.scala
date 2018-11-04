@@ -12,9 +12,6 @@ object NBHPlugin extends AutoPlugin {
   override val requires: Plugins = ScalaNativePlugin && PConfPlugin
 
   object autoImport {
-    val nbhPlatformId: SettingKey[String] =
-      settingKey[String]("ID of the platform we're running on")
-
     val nbhLinkFrameworks: SettingKey[Seq[String]] =
       settingKey("list of frameworks to link against")
 
