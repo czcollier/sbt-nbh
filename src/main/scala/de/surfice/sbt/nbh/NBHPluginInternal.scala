@@ -7,6 +7,10 @@ import sbt.impl.DependencyBuilders
 import collection.JavaConverters._
 
 object NBHPluginInternal {
+
+  lazy val nbhLinkLibrariesComputed: TaskKey[Seq[String]] =
+    taskKey("libraries to be linked defined explicitly and in package.conf files")
+
   lazy val nbhLinkFrameworksComputed: TaskKey[Seq[String]] =
     taskKey("frameworks to be linked defined explicitly and in package.conf files")
 
@@ -18,6 +22,13 @@ object NBHPluginInternal {
 
     pconfDefaultConfigPrefix := "sbt-nbh-config_",
 
+    nbhLinkLibraries := Nil,
+
+    nbhLinkLibrariesComputed := {
+      (nbhLinkLibraries.value ++ pconfConfig.value.getStringList("nbh.link.libraries").asScala)
+        .flatMap(Seq("-l",_))
+    },
+
     nbhLinkFrameworks := Nil,
 
     nbhLinkFrameworksComputed := {
@@ -27,7 +38,7 @@ object NBHPluginInternal {
 
     nbhNativeCompileOptions := Nil,
 
-    nbhNativeLinkingOptions := nbhLinkFrameworksComputed.value
+    nbhNativeLinkingOptions := nbhLinkFrameworksComputed.value ++ nbhLinkLibrariesComputed.value
 
   )
 

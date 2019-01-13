@@ -15,6 +15,9 @@ object NBHPlugin extends AutoPlugin {
     val nbhLinkFrameworks: SettingKey[Seq[String]] =
       settingKey("list of frameworks to link against")
 
+    val nbhLinkLibraries: SettingKey[Seq[String]] =
+      settingKey("list of libraries to link against")
+
     val nbhNativeCompileOptions: TaskKey[Seq[String]] =
       taskKey[Seq[String]]("nativeCompileOptions assembled by sbt-nbh")
 
