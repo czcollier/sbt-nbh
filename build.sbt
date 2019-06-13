@@ -1,9 +1,9 @@
 
 val Version = new {
-  val plugin       = "0.1.1-SNAPSHOT"
+  val plugin       = "0.2.0-SNAPSHOT"
   val sbt13        = "0.13.17"
   val sbt10        = "1.2.0"
-  val scala_native = "0.3.8"
+  val scala_native = "0.4.0-SNAPSHOT"
   val package_conf = "0.1.1"
   val scala211     = "2.11.12"
 }
@@ -15,9 +15,18 @@ val commonSettings = Seq(
   crossSbtVersions := Seq(Version.sbt13, Version.sbt10)
 )
 
+
+lazy val embed = project
+  .settings(commonSettings ++ publishingSettings: _*)
+  .settings(
+    name := "scalanative-embed"
+  )
+
+
 lazy val plugin = project
   .in(file("."))
-  .aggregate(config)
+  .aggregate(config,embed)
+  .dependsOn(embed)
   .settings(commonSettings ++ publishingSettings: _*)
   .settings(
     name := "sbt-nbh",
@@ -43,7 +52,6 @@ lazy val config = project
     name := "sbt-nbh-config",
     scalaVersion := Version.scala211
   )
-
 
 lazy val publishingSettings = Seq(
   publishMavenStyle := true,
