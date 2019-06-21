@@ -1,4 +1,4 @@
-addSbtPlugin("org.scala-native" % "sbt-scala-native" % "0.3.8")
+addSbtPlugin("org.scala-native" % "sbt-scala-native" % "0.4.0-M2")
 
 addSbtPlugin("de.surfice" % "sbt-package-conf" % "0.1.1")
 
