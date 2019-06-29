@@ -1,9 +1,9 @@
 
 val Version = new {
-  val plugin       = "0.1.2"
+  val plugin       = "0.1.3-SNAPSHOT"
   val sbt13        = "0.13.17"
   val sbt10        = "1.2.0"
-  val scala_native = "0.3.8"
+  val scala_native = "0.4.0-M2"
   val package_conf = "0.1.1"
   val scala211     = "2.11.12"
 }

@@ -35,8 +35,8 @@ object NBHMakePluginInternal {
       }
     },
 
-    nbhNativeLinkingOptions := {
-      nbhNativeLinkingOptions.value ++ nbhMake.value.map(_.path.get.absolutePath)
+    nbhNativeLinkingOptions ++= {
+      nbhMake.value.map(_.path.get.absolutePath)
     },
 
     nbhMakeProjectsComputed := {

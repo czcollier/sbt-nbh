@@ -3,10 +3,11 @@ package de.surfice.sbt.nbh
 
 import sbt.{Def, _}
 import Keys._
+import de.surfice.sbt.nbh.make.NBHMakePlugin
 import de.surfice.sbt.nbh.pkgconfig.NBHPkgConfigPlugin
 
 object NBHAutoPlugin extends AutoPlugin {
-  override def requires = NBHPkgConfigPlugin
+  override def requires = NBHPkgConfigPlugin && NBHMakePlugin
 
   import scala.scalanative.sbtplugin.ScalaNativePlugin.autoImport._
   import NBHPlugin.autoImport._
