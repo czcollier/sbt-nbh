@@ -9,8 +9,8 @@ import Keys._
 import de.surfice.sbt.nbh.make.NBHMakePlugin
 import de.surfice.sbt.nbh.pkgconfig.NBHPkgConfigPlugin
 
-import scala.scalanative.build.Config.ExternalSourceHook
-import scala.scalanative.nir.Attr.ExternalSource
+import scala.scalanative.build.Config.InlineSourceHook
+import scala.scalanative.nir.Attr.InlineSource
 
 object NBHCxxPlugin extends AutoPlugin {
   override def requires = NBHMakePlugin // && NBHPkgConfigPlugin
@@ -53,7 +53,7 @@ object NBHCxxPlugin extends AutoPlugin {
        """.stripMargin
     },
 
-    nativeExternalSourcesHooks += {
+    nativeInlineSourceHooks += {
       val buildDir = nbhCxxBuildDir.value
       val makeCmd = nbhMakeCmd.value.absolutePath
       new NBHCxxPluginInternal(buildDir,makeCmd,nbhCxxMakePreamble.value)

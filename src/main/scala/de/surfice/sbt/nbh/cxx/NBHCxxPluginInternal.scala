@@ -6,14 +6,14 @@ import sbt._
 
 import scala.collection.mutable
 import scala.scalanative.build
-import scala.scalanative.build.Config.ExternalSourceHook
-import scala.scalanative.nir.Attr.ExternalSource
+import scala.scalanative.build.Config.InlineSourceHook
+import scala.scalanative.nir.Attr.InlineSource
 
-class NBHCxxPluginInternal(buildDir: File, makeCmd: String, makePreamble: String) extends ExternalSourceHook {
+class NBHCxxPluginInternal(buildDir: File, makeCmd: String, makePreamble: String) extends InlineSourceHook {
 
   val name = "compile embedded C/C++/Objective-C sources"
 
-  override def process(srcs: Seq[ExternalSource], logger: build.Logger): Option[String] =
+  override def process(srcs: Seq[InlineSource], logger: build.Logger): Option[String] =
     Run()(logger)
       .collectSnippets(srcs)
       .prepareMakefile()
@@ -24,18 +24,18 @@ class NBHCxxPluginInternal(buildDir: File, makeCmd: String, makePreamble: String
       .make()
       .stats()
 
-  case class Run(cSnippets: Seq[ExternalSource] = Nil,
-                 cxxSnippets: Seq[ExternalSource] = Nil,
-                 mSnippets: Seq[ExternalSource] = Nil,
+  case class Run(cSnippets: Seq[InlineSource] = Nil,
+                 cxxSnippets: Seq[InlineSource] = Nil,
+                 mSnippets: Seq[InlineSource] = Nil,
                  makeFile: Option[String] = None,
                  cSources: Seq[(File,String)] = Nil,
                  cxxSources: Seq[(File,String)] = Nil,
                  mSources: Seq[(File,String)] = Nil)(implicit logger: build.Logger) {
 
-    def collectSnippets(srcs: Seq[ExternalSource]) = {
-      val cSources = mutable.UnrolledBuffer.empty[ExternalSource]
-      val cxxSources = mutable.UnrolledBuffer.empty[ExternalSource]
-      val mSources = mutable.UnrolledBuffer.empty[ExternalSource]
+    def collectSnippets(srcs: Seq[InlineSource]) = {
+      val cSources = mutable.UnrolledBuffer.empty[InlineSource]
+      val cxxSources = mutable.UnrolledBuffer.empty[InlineSource]
+      val mSources = mutable.UnrolledBuffer.empty[InlineSource]
       srcs.foreach( src => src.language match {
         case "C" => cSources += src
         case "Cxx" | "C++" => cxxSources += src
