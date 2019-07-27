@@ -13,6 +13,16 @@ object NBHPkgConfigPlugin extends AutoPlugin {
 
     val nbhPkgConfigModules: SettingKey[Seq[String]] =
       settingKey[Seq[String]]("pkg-config modules included when assembling nbhNativeCompileOptions and nbhNativeLinkingOptions")
+
+    val nbhPkgConfigLinkingFlags: TaskKey[Seq[String]] =
+      taskKey[Seq[String]]("result of `pkg-config --libs ${nbhPkgConfigModules}`")
+
+    val nbhPkgConfigCFlags: TaskKey[Seq[String]] =
+      taskKey[Seq[String]]("result of `pkg-config --cflags ${nbhPkgConfigModules}")
+
+    val nbhPkgConfigModulesComputed: TaskKey[Seq[String]] =
+      taskKey[Seq[String]]("pkg-config modules defined explicitly and in package-conf files")
+
   }
 
   import autoImport._
