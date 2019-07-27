@@ -23,13 +23,13 @@ object NBHCxxPlugin extends AutoPlugin {
 
 //    val nbhCxxCompiler = taskKey[File]("Compiler used to compile embedded C++ source snippets")
 
-    val nbhCxxCFlags = settingKey[Seq[String]]("CFLAGS used to compile embedded C source")
+    val nbhCxxCFlags = taskKey[Seq[String]]("CFLAGS used to compile embedded C source")
 
-    val nbhCxxCXXFlags = settingKey[Seq[String]]("CXXFLAGS used to compile embedded C++ sources")
+    val nbhCxxCXXFlags = taskKey[Seq[String]]("CXXFLAGS used to compile embedded C++ sources")
 
-    val nbhCxxLDFlags = settingKey[Seq[String]]("LDFLAGS used to link code generated from embedded sources")
+    val nbhCxxLDFlags = taskKey[Seq[String]]("LDFLAGS used to link code generated from embedded sources")
 
-    val nbhCxxMakePreamble = settingKey[String]("Preamble added to makefile")
+    val nbhCxxMakePreamble = taskKey[String]("Preamble added to makefile")
   }
 
   import scala.scalanative.sbtplugin.ScalaNativePlugin.autoImport._
@@ -63,6 +63,6 @@ object NBHCxxPlugin extends AutoPlugin {
       (nbhCxxBuildDir.value / "clib.o").getAbsolutePath,
       (nbhCxxBuildDir.value / "cxxlib.o").getAbsolutePath,
       (nbhCxxBuildDir.value / "mlib.o").getAbsolutePath
-    ) ++ nbhCxxLDFlags.value
+    )
   )
 }
