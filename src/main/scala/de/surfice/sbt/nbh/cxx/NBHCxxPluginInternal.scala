@@ -1,13 +1,13 @@
 // Copyright (c) 2019. Distributed under the MIT License (see included LICENSE file).
 package de.surfice.sbt.nbh.cxx
 
-import de.surfice.sbt.nbh.make.NBHMakePlugin.autoImport.NBHMakeProject
 import sbt._
 
 import scala.collection.mutable
 import scala.scalanative.build
 import scala.scalanative.build.Config.InlineSourceHook
 import scala.scalanative.nir.Attr.InlineSource
+import scala.scalanative.sbtplugin.process.Process
 
 class NBHCxxPluginInternal(buildDir: File, makeCmd: String, makePreamble: String) extends InlineSourceHook {
 

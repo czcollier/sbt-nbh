@@ -1,16 +1,10 @@
 // Copyright (c) 2019. Distributed under the MIT License (see included LICENSE file).
 package de.surfice.sbt.nbh.cxx
 
-import java.nio.file.Files
 
-import de.surfice.sbt.nbh.NBHPlugin
-import sbt._
-import Keys._
 import de.surfice.sbt.nbh.make.NBHMakePlugin
-import de.surfice.sbt.nbh.pkgconfig.NBHPkgConfigPlugin
-
-import scala.scalanative.build.Config.InlineSourceHook
-import scala.scalanative.nir.Attr.InlineSource
+import sbt.Keys._
+import sbt._
 
 object NBHCxxPlugin extends AutoPlugin {
   override def requires = NBHMakePlugin // && NBHPkgConfigPlugin
@@ -32,9 +26,10 @@ object NBHCxxPlugin extends AutoPlugin {
     val nbhCxxMakePreamble = taskKey[String]("Preamble added to makefile")
   }
 
-  import scala.scalanative.sbtplugin.ScalaNativePlugin.autoImport._
   import NBHMakePlugin.autoImport._
   import autoImport._
+
+  import scala.scalanative.sbtplugin.ScalaNativePlugin.autoImport._
 
   override def projectSettings = Seq(
 

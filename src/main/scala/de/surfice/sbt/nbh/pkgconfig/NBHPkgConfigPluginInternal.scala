@@ -2,11 +2,11 @@
 package de.surfice.sbt.nbh.pkgconfig
 
 import sbt._
-import Keys._
 import de.surfice.sbt.nbh.Utils._
-import collection.JavaConverters._
 
+import collection.JavaConverters._
 import scala.scalanative.sbtplugin.Utilities.SilentLogger
+import scala.scalanative.sbtplugin.process.Process
 
 object NBHPkgConfigPluginInternal {
   import NBHPkgConfigPlugin.autoImport._

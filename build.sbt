@@ -2,9 +2,9 @@
 val Version = new {
   val plugin       = "0.2.0-SNAPSHOT"
   val sbt13        = "0.13.17"
-  val sbt10        = "1.2.0"
+  val sbt10        = "1.3.9"
   val scala_native = "0.4.0-SNAPSHOT"
-  val package_conf = "0.1.1"
+  val package_conf = "0.2.0-SNAPSHOT"
   val scala211     = "2.11.12"
 }
 
@@ -25,12 +25,15 @@ lazy val embed = project
 
 lazy val plugin = project
   .in(file("."))
+  .enablePlugins(SbtPlugin)
   .aggregate(config,embed)
   .dependsOn(embed)
   .settings(commonSettings ++ publishingSettings: _*)
   .settings(
     name := "sbt-nbh",
     sbtPlugin := true,
+    scriptedLaunchOpts += "-Dplugin.version=" + version.value,
+    scriptedBufferLog := false,
     addSbtPlugin("org.scala-native" % "sbt-scala-native" % Version.scala_native),
     addSbtPlugin("de.surfice" % "sbt-package-conf" % Version.package_conf),
     sourceGenerators in Compile += Def.task {
@@ -87,13 +90,8 @@ lazy val publishingSettings = Seq(
 lazy val dontPublish = Seq(
     publish := {},
     publishLocal := {},
-    com.typesafe.sbt.pgp.PgpKeys.publishSigned := {},
-    com.typesafe.sbt.pgp.PgpKeys.publishLocalSigned := {},
+    publish / skip := true,
     publishArtifact := false,
     publishTo := Some(Resolver.file("Unused transient repository",file("target/unusedrepo")))
   )
 
-lazy val scriptedSettings = ScriptedPlugin.scriptedSettings ++ Seq(
-  scriptedLaunchOpts += "-Dplugin.version=" + version.value,
-  scriptedBufferLog := false
-)

@@ -3,7 +3,7 @@ package de.surfice.sbt.nbh
 
 import sbt._
 import Keys._
-import sbt.impl.DependencyBuilders
+
 import collection.JavaConverters._
 
 object NBHPluginInternal {
@@ -18,7 +18,8 @@ object NBHPluginInternal {
   import de.surfice.sbt.pconf.PConfPlugin.autoImport._
 
   lazy val projectSettings: Seq[Setting[_]] = Seq(
-    libraryDependencies += DepBuilder.toGroupID("de.surfice") %% "sbt-nbh-config" % Versions.plugin,
+    libraryDependencies += ModuleID("de.surfice","sbt-nbh-config",Versions.plugin),
+      //DepBuilder.toGroupID("de.surfice") %% "sbt-nbh-config" % Versions.plugin,
 
     pconfDefaultConfigPrefix := "sbt-nbh-config_",
 
@@ -42,5 +43,5 @@ object NBHPluginInternal {
 
   )
 
-  private object DepBuilder extends DependencyBuilders
+//  private object DepBuilder extends DependencyBuilders
 }

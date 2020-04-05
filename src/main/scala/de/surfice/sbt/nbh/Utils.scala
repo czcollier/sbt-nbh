@@ -1,16 +1,15 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package de.surfice.sbt.nbh
 
-import java.net.JarURLConnection
-import java.nio.file.{CopyOption, Files, Path, StandardCopyOption}
+import java.nio.file.StandardCopyOption
 
 import sbt.Keys.Classpath
 import sbt._
 
 import scala.scalanative.sbtplugin.Utilities.SilentLogger
+import scala.scalanative.sbtplugin.process.Process
 
 object Utils {
-  import scala.collection.JavaConverters._
 
   def discover(binaryName: String, suffixes: Seq[String] = Seq("")): File = {
     val envName = binaryName.toUpperCase
@@ -65,15 +64,8 @@ object Utils {
 
   def copyFromJar(resource: java.nio.file.Path, source: String, target: java.nio.file.Path): Boolean = {
 
-    import java.nio.file.{
-      Files,
-      FileSystems,
-      FileVisitResult,
-      SimpleFileVisitor,
-      Paths,
-      Path
-    }
     import java.nio.file.attribute.BasicFileAttributes
+    import java.nio.file.{FileSystems, FileVisitResult, Files, Path, Paths, SimpleFileVisitor}
 
     val fileSystem = FileSystems.newFileSystem(resource, null)
     val jarPath = fileSystem.getPath(source)

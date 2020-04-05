@@ -2,7 +2,6 @@
 package de.surfice.sbt.nbh
 
 import sbt.{Def, _}
-import Keys._
 import de.surfice.sbt.pconf.PConfPlugin
 
 import scala.scalanative.sbtplugin.ScalaNativePlugin

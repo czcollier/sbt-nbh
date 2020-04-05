@@ -1,7 +1,7 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package de.surfice.sbt.nbh.pkgconfig
 
-import de.surfice.sbt.nbh.{NBHPlugin, Utils}
+import de.surfice.sbt.nbh.NBHPlugin
 import sbt.{Def, _}
 
 object NBHPkgConfigPlugin extends AutoPlugin {
@@ -25,7 +25,6 @@ object NBHPkgConfigPlugin extends AutoPlugin {
 
   }
 
-  import autoImport._
 
   override def projectSettings: Seq[Def.Setting[_]] = NBHPkgConfigPluginInternal.projectSettings
 }

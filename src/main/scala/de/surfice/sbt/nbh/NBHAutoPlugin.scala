@@ -2,7 +2,6 @@
 package de.surfice.sbt.nbh
 
 import sbt.{Def, _}
-import Keys._
 import de.surfice.sbt.nbh.make.NBHMakePlugin
 import de.surfice.sbt.nbh.pkgconfig.NBHPkgConfigPlugin
 
