@@ -1,18 +1,20 @@
 
 val Version = new {
   val plugin       = "0.2.0-SNAPSHOT"
-  val sbt13        = "0.13.17"
   val sbt10        = "1.3.9"
   val scala_native = "0.4.0-SNAPSHOT"
   val package_conf = "0.2.0-SNAPSHOT"
   val scala211     = "2.11.12"
+  val scala212     = "2.12.10"
 }
+
+lazy val supportedScalaVersions = List(Version.scala212, Version.scala211) 
 
 val commonSettings = Seq(
   version := Version.plugin,
   organization := "de.surfice",
   scalacOptions ++= Seq("-deprecation","-unchecked","-feature","-Xlint"),
-  crossSbtVersions := Seq(Version.sbt13, Version.sbt10)
+  crossSbtVersions := Seq(Version.sbt10)
 )
 
 
@@ -53,7 +55,7 @@ lazy val config = project
   .settings(commonSettings ++ publishingSettings: _*)
   .settings(
     name := "sbt-nbh-config",
-    scalaVersion := Version.scala211
+    crossScalaVersions := supportedScalaVersions //scalaVersion := Version.scala211
   )
 
 lazy val publishingSettings = Seq(
