@@ -2,11 +2,11 @@
 package de.surfice.sbt.nbh.pkgconfig
 
 import sbt._
+import sbt.Keys._
 import de.surfice.sbt.nbh.Utils._
 
 import collection.JavaConverters._
-import scala.scalanative.sbtplugin.Utilities.SilentLogger
-import scala.scalanative.sbtplugin.process.Process
+import scala.sys.process._
 
 object NBHPkgConfigPluginInternal {
   import NBHPkgConfigPlugin.autoImport._
@@ -25,13 +25,13 @@ object NBHPkgConfigPluginInternal {
 
     nbhPkgConfigLinkingFlags := {
       Process(Seq(nbhPkgConfig.value.absolutePath, "--libs") ++ nbhPkgConfigModulesComputed.value)
-        .lines_!(SilentLogger)
+        .lineStream_!
         .flatMap(_.split(" "))
     },
 
     nbhPkgConfigCFlags := {
       Process(Seq(nbhPkgConfig.value.absolutePath, "--cflags") ++ nbhPkgConfigModulesComputed.value)
-        .lines_!(SilentLogger)
+        .lineStream_!
         .flatMap(_.split(" "))
     },
 
