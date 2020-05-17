@@ -36,7 +36,7 @@ object Utils {
   def resourceDirs(cp: Classpath): Seq[File] = cp.files.filter(_.isDirectory)
 
   def copyResourceDir(dirs: Seq[File], srcPath: File, targetPath: File): Unit =
-    if(! targetPath.exists())
+//    if(! targetPath.exists())
       if(srcPath.exists())
         IO.copyDirectory(srcPath,targetPath)
       else {
@@ -47,8 +47,11 @@ object Utils {
           else
             copyFromJar(path,srcPath.toString,targetPath.toPath)
         } match {
-          case None => sys.error("Could not copy resource directory: "+srcPath)
+          case None =>
+            sys.error("Could not copy resource directory: "+srcPath)
           case _ =>
+            ()
+//            println("copied: "+srcPath)
         }
       }
 
