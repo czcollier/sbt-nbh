@@ -7,7 +7,7 @@ import de.surfice.sbt.nbh.Utils
 import de.surfice.sbt.nbh.Utils._
 
 import collection.JavaConverters._
-import scala.scalanative.sbtplugin.process.Process
+import scala.sys.process.Process
 
 object NBHMakePluginInternal {
   import de.surfice.sbt.nbh.make.NBHMakePlugin.autoImport._

@@ -13,8 +13,6 @@ object NBHPkgConfigPluginInternal {
   import de.surfice.sbt.nbh.NBHPlugin.autoImport._
   import de.surfice.sbt.pconf.PConfPlugin.autoImport._
 
-
-
   lazy val projectSettings: Seq[Setting[_]] = Seq(
     nbhPkgConfig := discover("pkg-config"),
     nbhPkgConfigModules := Nil,

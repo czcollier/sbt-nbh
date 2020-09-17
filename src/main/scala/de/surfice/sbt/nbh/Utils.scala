@@ -6,8 +6,8 @@ import java.nio.file.StandardCopyOption
 import sbt.Keys.Classpath
 import sbt._
 
-import scala.scalanative.sbtplugin.Utilities.SilentLogger
-import scala.scalanative.sbtplugin.process.Process
+import scala.sys.process.{Process, ProcessLogger}
+import scala.scalanative.sbtplugin
 
 object Utils {
 
@@ -19,7 +19,7 @@ object Utils {
       case None => {
         val binaryNames = suffixes.map(binaryName + _)
         Process("which" +: binaryNames)
-          .lines_!(SilentLogger)
+          .lines_!
           .map(file(_))
           .headOption
           .getOrElse{

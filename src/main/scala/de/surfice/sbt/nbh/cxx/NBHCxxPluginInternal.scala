@@ -7,7 +7,7 @@ import scala.collection.mutable
 import scala.scalanative.build
 import scala.scalanative.build.Config.InlineSourceHook
 import scala.scalanative.nir.Attr.InlineSource
-import scala.scalanative.sbtplugin.process.Process
+import scala.sys.process.Process
 
 class NBHCxxPluginInternal(buildDir: File, makeCmd: String, makePreamble: String) extends InlineSourceHook {
 
