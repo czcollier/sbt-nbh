@@ -1,11 +1,12 @@
 
 val Version = new {
   val plugin       = "0.2.0-SNAPSHOT"
-  val sbt10        = "1.3.9"
-  val scala_native = "0.4.0-SNAPSHOT"
+  val sbt10        = "1.9.9"
+  val scala_native = "0.4.16"
   val package_conf = "0.2.0-SNAPSHOT"
   val scala211     = "2.11.12"
   val scala212     = "2.12.10"
+  val scala3       = "3.4.1"
 }
 
 lazy val supportedScalaVersions = List(Version.scala212, Version.scala211) 
